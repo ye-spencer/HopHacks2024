@@ -97,15 +97,6 @@
 
       // Adding layer to the map
       map.addLayer(layer);
-
-      // Creating a marker object and adding it to the map
-      // var marker = new L.marker([39.2904, -76.6122], {
-      //   title: "You are here",
-      // }).addTo(map);
-
-      // var marker2 = new L.marker([36.7783, 119.4179], {
-      //   title: "California",
-      // }).addTo(map);
     </script>
     <script>
       const apiKey = "66e5c9dda2d53417477509ybn603cd4";
@@ -133,14 +124,37 @@
                 title: "",
               }).addTo(map);
 
-              marker1.bindPopup("ASDFLASJDFLASJDFLKASJDFLKASJDLKF");
+              // Create custom popup content with a link
+              const popupContent = `
+              <div class="popup-content">
+                <h4 style="font-weight = bold; font-size: 1.5em;" class="popup-title">Charity Name</h2>
+                <div class="popup-description"><p>Description<br>
+                  <a href="about;blank" class="popup-link" target="_blank">Donate Link</a></p></div>
+                
+              </div>
+            `;
+
+              // Bind the custom popup content to the marker
+              marker1.bindPopup(popupContent);
+
+              let closePopupTimeout; // Variable to store the timeout
+
+              // Show popup on mouseover
               marker1.on("mouseover", function () {
-                marker.openPopup();
-              });
-              marker1.on("mouseout", function () {
-                marker.openPopup();
+                marker1.openPopup();
+                // If there's a timeout waiting to close the popup, clear it
+                if (closePopupTimeout) {
+                  clearTimeout(closePopupTimeout);
+                }
               });
 
+              // Hide popup with a 3-second delay on mouseout
+              marker1.on("mouseout", function () {
+                // Set a timeout to close the popup after 3 seconds
+                closePopupTimeout = setTimeout(function () {
+                  marker1.closePopup();
+                }, 3000); // 3000 milliseconds = 3 seconds
+              });
               return { latitude: lat, longitude: lon }; // Return coordinates
             } else {
               console.log("No results found for the address.");
@@ -167,8 +181,22 @@
           const address = inputValue;
           console.log("TEST");
 
-          console.log(getCoordinates(address));
-          console.log(getCoordinates("Baltimore"));
+          getCoordinates(address);
+        },
+        { passive: false }
+      );
+    </script>
+    <script>
+      var cityorname = "";
+      document.getElementById("search-form").addEventListener(
+        "submit",
+        function (event) {
+          event.preventDefault(); // Prevent the default form submission
+          const inputValue = document.getElementById("search-input").value; // Get the input value
+          console.log(inputValue); // You can use this value as needed
+          // Add your search logic here
+          // Example: alert('Searching for: ' + inputValue);
+          cityorname = inputValue;
         },
         { passive: false }
       );
