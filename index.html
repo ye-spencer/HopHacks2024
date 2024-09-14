@@ -72,6 +72,46 @@
     <!-- Container for Leaflet map -->
     <div id="map"></div>
 
+    <!-- Auto-donate section -->
+    <div id="auto-donate" class="container mt-4">
+      <h2 class="text-center mb-4">Indecisive? Let us distribute your donation for you!</h2>
+      <div class="row">
+          <div class="col-12 col-md-6 mx-auto">
+              <div class="mb-3">
+                  <label for="amount-input" class="form-label"> I want to donate ...</label>
+                  <input
+                      class="form-control"
+                      type="number"
+                      id="amount-input"
+                      placeholder="Enter Amount ($)"
+                      aria-label="Donation Amount"
+                      required
+                  />
+              </div>
+              <div class="mb-3">
+                  <label for="desire-input" class="form-label"> towards supporting...</label>
+                  <input
+                      class="form-control"
+                      type="text"
+                      id="desire-input"
+                      placeholder="Enter Goal"
+                      aria-label="Donation Goal"
+                      required
+                  />
+              </div>
+              <button
+                  class="btn btn-outline-success w-100"
+                  id="donate-button"
+                  type="submit"
+              >Donate!</button>
+              <p
+                  id="donation-result"
+                  class="text-center mt-3"
+              ></p>
+          </div>
+      </div>
+    </div>
+
     <!--script for button activation -->
     <script src="buttonscript.js"></script>
 
@@ -82,5 +122,6 @@
     ></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="aidan_collectinfo.js"></script>
+    <script src="spencer_autodonate.js"></script>
   </body>
 </html>

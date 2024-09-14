@@ -32,6 +32,7 @@ function findCharitiesBasedOnDesireAndAmount(desire, amount)
     {
         // Handle the response data
         console.log('Response:', data.choices[0].message.content);
+        document.getElementById("donation-result").innerHTML = "Your donation has gone to: <br><br>" + data.choices[0].message.content.replaceAll("\n", "<br>");
     })
     .catch(error => 
     {
@@ -41,10 +42,13 @@ function findCharitiesBasedOnDesireAndAmount(desire, amount)
 }
 
 
+function onDonateButton()
+{
+    let amount = document.getElementById("amount-input").value;
+    let desire = document.getElementById("desire-input").value;
+    console.log(desire);
+    console.log(amount);
+    findCharitiesBasedOnDesireAndAmount(desire, amount);
+}
 
-
-
-//console.log(`Can you find 2 to 5 charities that match up with this desire "i want to donate to support ${desire}", and distribute 100 points among the charities based on how well they match up`);
-desire = "abortion in california"; // need to collect
-amount = "15"; // need to collect
-findCharitiesBasedOnDesireAndAmount(desire, amount);
+document.getElementById("donate-button").addEventListener("click", onDonateButton);
