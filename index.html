@@ -97,15 +97,6 @@
 
       // Adding layer to the map
       map.addLayer(layer);
-
-      // Creating a marker object and adding it to the map
-      // var marker = new L.marker([39.2904, -76.6122], {
-      //   title: "You are here",
-      // }).addTo(map);
-
-      // var marker2 = new L.marker([36.7783, 119.4179], {
-      //   title: "California",
-      // }).addTo(map);
     </script>
     <script>
       const apiKey = "66e5c9dda2d53417477509ybn603cd4";
@@ -132,7 +123,7 @@
               var marker1 = new L.marker([lat, lon], {
                 title: "",
               }).addTo(map);
-              
+
               // Create custom popup content with a link
               const popupContent = `
               <div class="popup-content">
@@ -149,7 +140,7 @@
               let closePopupTimeout; // Variable to store the timeout
 
               // Show popup on mouseover
-              marker1.on('mouseover', function () {
+              marker1.on("mouseover", function () {
                 marker1.openPopup();
                 // If there's a timeout waiting to close the popup, clear it
                 if (closePopupTimeout) {
@@ -158,9 +149,9 @@
               });
 
               // Hide popup with a 3-second delay on mouseout
-              marker1.on('mouseout', function () {
+              marker1.on("mouseout", function () {
                 // Set a timeout to close the popup after 3 seconds
-                closePopupTimeout = setTimeout(function() {
+                closePopupTimeout = setTimeout(function () {
                   marker1.closePopup();
                 }, 3000); // 3000 milliseconds = 3 seconds
               });
@@ -191,6 +182,21 @@
           console.log("TEST");
 
           getCoordinates(address);
+        },
+        { passive: false }
+      );
+    </script>
+    <script>
+      var cityorname = "";
+      document.getElementById("search-form").addEventListener(
+        "submit",
+        function (event) {
+          event.preventDefault(); // Prevent the default form submission
+          const inputValue = document.getElementById("search-input").value; // Get the input value
+          console.log(inputValue); // You can use this value as needed
+          // Add your search logic here
+          // Example: alert('Searching for: ' + inputValue);
+          cityorname = inputValue;
         },
         { passive: false }
       );
