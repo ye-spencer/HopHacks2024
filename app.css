@@ -22,6 +22,11 @@
   font-size: 1.2rem;
   height: 50px;
 }
+
+#search-input {
+  width: 19.3em;
+}
+
 #map {
   margin: 4% auto;
   height: 60em;

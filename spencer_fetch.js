@@ -1,5 +1,4 @@
-const google_api_key = "AIzaSyB9Q3ocLVeLh1mGJiO9LcjMmapgSNWwLYI";
-
+const google_api_key = config.GOOGLE_GEO_KEY;
 /*
     Returns Longtitude and Latitude as floats, otherwise, [0, 0] on error
 */

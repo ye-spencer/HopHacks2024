@@ -1,6 +1,7 @@
 const city = "Baltimore"; // Replace with the desired city
-const apiKeyCharities = "pk_live_f87a789027667373a4a7d519fd830f89"; // Replace with your actual API key
 
+apiKeyCharities = config.CHARITIES_API_KEY;
+const google_api_key = config.GOOGLE_GEO_KEY;
 let charities = [];
 
 // Function to get charities
@@ -109,8 +110,6 @@ var layer = new L.TileLayer(
 
 // Adding layer to the map
 map.addLayer(layer);
-
-const google_api_key = "AIzaSyB9Q3ocLVeLh1mGJiO9LcjMmapgSNWwLYI";
 
 // Function to fetch coordinates from Google Maps API
 async function getDataFromNameHelper(name, location) {

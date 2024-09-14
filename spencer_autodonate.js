@@ -1,7 +1,7 @@
 // import addDonation from './mongo_connect.mjs';
 
 // Define your API key
-const apiKey = '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';
+const apiKey = config.CHAT_GPT_KEY;
 
 function findCharitiesBasedOnDesireAndAmount(desire, amount)
 {
