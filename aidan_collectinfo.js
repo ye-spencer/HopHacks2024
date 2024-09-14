@@ -32,43 +32,46 @@ async function getData(search) {
         charities[i].name,
         charities[i].locationAddress
       );
-      if (charities[i].websiteUrl) {
-        L.marker(coords)
-          .addTo(map)
-          .bindPopup(
-            `
-          <div class="popup-content">
-            <h4 class="popup-title">${charities[i].name}</h4>
-            <a href="${
-              `https://www.every.org/${charities[i].ein}#donate` || "#"
-            }" class="popup-link" target="_blank">Donate Now</a><br>
-            <a href="//${
-              charities[i].websiteUrl
-            }" class="popup-link" target="_blank">Website</a> 
-          </div>
-        `
-          )
-          .on("mouseover", function () {
-            this.openPopup();
-          });
-      } else {
-        L.marker(coords)
-          .addTo(map)
-          .bindPopup(
-            `
-          <div class="popup-content">
-            <h4 class="popup-title">${charities[i].name}</h4>
-            <a href="${
-              `https://www.every.org/${charities[i].ein}#donate` || "#"
-            }" class="popup-link" target="_blank">Donate Link</a><br>
-            No website found
-          </div>
-        `
-          )
-          .on("mouseover", function () {
-            this.openPopup();
-          });
+      if (coords) {
+        if (charities[i].websiteUrl) {
+          L.marker(coords)
+            .addTo(map)
+            .bindPopup(
+              `
+            <div class="popup-content">
+              <h4 class="popup-title">${charities[i].name}</h4>
+              <a href="${
+                `https://www.every.org/${charities[i].ein}#donate` || "#"
+              }" class="popup-link" target="_blank">Donate Now</a><br>
+              <a href="//${
+                charities[i].websiteUrl
+              }" class="popup-link" target="_blank">Website</a> 
+            </div>
+          `
+            )
+            .on("mouseover", function () {
+              this.openPopup();
+            });
+        } else {
+          L.marker(coords)
+            .addTo(map)
+            .bindPopup(
+              `
+            <div class="popup-content">
+              <h4 class="popup-title">${charities[i].name}</h4>
+              <a href="${
+                `https://www.every.org/${charities[i].ein}#donate` || "#"
+              }" class="popup-link" target="_blank">Donate Link</a><br>
+              No website found
+            </div>
+          `
+            )
+            .on("mouseover", function () {
+              this.openPopup();
+            });
+        }
       }
+      
     }
   } catch (error) {
     console.error(error.message);
@@ -120,11 +123,11 @@ async function getDataFromNameHelper(name, location) {
       return [location.lat, location.lng];
     } else {
       console.error("Geocoding failed:", data.status);
-      return [0, 0];
+      return null;
     }
   } catch (error) {
     console.log(error);
-    return [0, 0];
+    return null;
   }
 }
 
