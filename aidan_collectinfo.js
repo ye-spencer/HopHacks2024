@@ -88,7 +88,7 @@ function onSearch(event) {
 // Creating map options
 var mapOptions = {
   center: [36.5, -100],
-  zoom: 10,
+  zoom: 3,
 };
 
 // Creating a map object
