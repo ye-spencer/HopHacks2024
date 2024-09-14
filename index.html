@@ -155,6 +155,7 @@
           });
       }
       //example usage
+      // const { latitude, longitude } = getCoordinates("Baltimore");
       document.getElementById("search-form").addEventListener(
         "submit",
         function (event) {
@@ -165,6 +166,7 @@
           // Example: alert('Searching for: ' + inputValue);
           const address = inputValue;
           console.log("TEST");
+
           console.log(getCoordinates(address));
           console.log(getCoordinates("Baltimore"));
         },
