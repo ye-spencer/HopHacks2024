@@ -25,22 +25,38 @@
         <a class="navbar-brand" href="#">Charity Searcher</a>
 
         <!-- Center section: Search bar -->
-        <form class="d-flex mx-auto" role="search">
+        <form class="d-flex mx-auto" role="search" id="search-form">
           <input
             class="form-control me-2"
             type="search"
-            id="search-form"
+            id="search-input"
             placeholder="Search by location or name"
             aria-label="Search"
+            required
           />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button
+            class="btn btn-outline-success"
+            id="search-button"
+            type="submit"
+          >
+            Search
+          </button>
         </form>
 
-        <!-- Right section: Words (links or other content) -->
+        <!-- Right section: Filters -->
         <div class="nav-section-right">
-          <a href="#" class="me-3">Home</a>
-          <a href="#" class="me-3">About</a>
-          <a href="#">Contact</a>
+          Filters:
+          <div class="">
+            <button type="button" class="btn btn-dark btn-xs">
+              Non-Profits
+            </button>
+            <button type="button" class="btn btn-dark btn-xs">
+              Food Banks
+            </button>
+            <button type="button" class="btn btn-dark btn-xs">
+              Social Wellfare
+            </button>
+          </div>
         </div>
       </div>
     </nav>
@@ -54,6 +70,9 @@
     </div>
     <!-- Container for Leaflet map -->
     <div id="map"></div>
+
+    <!--script for button activation -->
+    <script src="buttonscript.js"></script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -80,38 +99,79 @@
       map.addLayer(layer);
 
       // Creating a marker object and adding it to the map
-      var marker = new L.marker([39.2904, -76.6122], {
-        title: "You are here",
-      }).addTo(map);
+      // var marker = new L.marker([39.2904, -76.6122], {
+      //   title: "You are here",
+      // }).addTo(map);
 
       // var marker2 = new L.marker([36.7783, 119.4179], {
       //   title: "California",
       // }).addTo(map);
     </script>
-
     <script>
-      const city = "Bethesda"; // Replace with the desired city
-      const apiKey =
-        "live-6-EB5SBmuXdr8hFNwWaV4KxcDZGPQvlG-jY036_wuNh03h9Zdua2dqWwGyoSeVmxBA28aHyExvTRg6PC"; // Replace with your actual API key
+      const apiKey = "66e5c9dda2d53417477509ybn603cd4";
 
-      fetch(`https://api.charityapi.org/api/organizations/search/${city}`, {
-        method: "GET",
-        headers: {
-          apikey: apiKey,
+      // Function to convert street address to coordinates
+      function getCoordinates(address) {
+        const url = `https://geocode.maps.co/search?q=${encodeURIComponent(
+          address
+        )}&api_key=${apiKey}`;
+
+        // Make a GET request to the API
+        fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json(); // Parse the JSON data
+          })
+          .then((data) => {
+            if (data && data.length > 0) {
+              const { lat, lon } = data[0]; // Get the latitude and longitude from the first result
+              console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+              map.setView([lat, lon], 10);
+              var marker1 = new L.marker([lat, lon], {
+                title: "",
+              }).addTo(map);
+
+              marker1.bindPopup("ASDFLASJDFLASJDFLKASJDFLKASJDLKF");
+              marker1.on("mouseover", function () {
+                marker.openPopup();
+              });
+              marker1.on("mouseout", function () {
+                marker.openPopup();
+              });
+
+              return { latitude: lat, longitude: lon }; // Return coordinates
+            } else {
+              console.log("No results found for the address.");
+              return null; // No coordinates found
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+      }
+      //example usage
+      // const { latitude, longitude } = getCoordinates("Baltimore");
+      document.getElementById("search-form").addEventListener(
+        "submit",
+        function (event) {
+          event.preventDefault(); // Prevent the default form submission
+          const inputValue = document.getElementById("search-input").value; // Get the input value
+          console.log(inputValue); // You can use this value as needed
+          // Add your search logic here
+          // Example: alert('Searching for: ' + inputValue);
+          const address = inputValue;
+          console.log("TEST");
+
+          console.log(getCoordinates(address));
+          console.log(getCoordinates("Baltimore"));
         },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data); // Handle the data returned from the API
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
+        { passive: false }
+      );
     </script>
   </body>
 </html>

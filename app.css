@@ -9,13 +9,6 @@
 }
 
 .form-control {
-  font-size: 1.1rem;
-}
-
-.btn {
-  font-size: 1.1rem;
-}
-.form-control {
   font-size: 1.2rem;
   height: 50px;
   width: 300px;
@@ -25,10 +18,15 @@
   font-size: 1.2rem;
   height: 50px;
 }
+
+#search-btn {
+  font-size: 1.2rem;
+  height: 50px;
+}
 #map {
   margin: 5% auto;
-  height: 80em;
-  width: 90%;
+  height: 60em;
+  width: 80%;
   border: 1px solid black;
 }
 .nav-section-right {
@@ -37,4 +35,47 @@
 #welcome {
   font-size: 2rem;
   margin-top: 10rem;
+}
+.btn-group-xs > .btn,
+.btn-xs {
+  padding: 0.25rem 0.4rem;
+  font-size: 0.875rem;
+  line-height: 0.5;
+  border-radius: 0.4rem;
+}
+.btn.active {
+  background-color: rgb(5, 36, 123); /* Example color for the selected button */
+  color: white;
+}
+
+@media (max-width: 513px) {
+  .navbar {
+    padding: 4rem 2rem;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+  .btn-xs {
+    padding: 0.1rem 0.3rem;
+    font-size: 0.7rem;
+    line-height: 0.2;
+  }
+  .nav-section-right {
+    margin-top: 1rem;
+  }
+  .form-control {
+    font-size: 0.8rem;
+    height: 30px;
+    width: 250px;
+    margin-left: 0;
+  }
+  .btn {
+    font-size: 0.7rem;
+    height: 3em;
+  }
+  #search-button {
+    font-size: 0.8rem;
+  }
+  #welcome {
+    margin-top: 10rem;
+  }
 }
