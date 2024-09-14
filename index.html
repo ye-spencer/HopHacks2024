@@ -132,15 +132,38 @@
               var marker1 = new L.marker([lat, lon], {
                 title: "",
               }).addTo(map);
+              
+              // Create custom popup content with a link
+              const popupContent = `
+              <div class="popup-content">
+                <h4 style="font-weight = bold; font-size: 1.5em;" class="popup-title">Charity Name</h2>
+                <div class="popup-description"><p>Description<br>
+                  <a href="about;blank" class="popup-link" target="_blank">Donate Link</a></p></div>
+                
+              </div>
+            `;
 
-              marker1.bindPopup("ASDFLASJDFLASJDFLKASJDFLKASJDLKF");
-              marker1.on("mouseover", function () {
-                marker.openPopup();
-              });
-              marker1.on("mouseout", function () {
-                marker.openPopup();
+              // Bind the custom popup content to the marker
+              marker1.bindPopup(popupContent);
+
+              let closePopupTimeout; // Variable to store the timeout
+
+              // Show popup on mouseover
+              marker1.on('mouseover', function () {
+                marker1.openPopup();
+                // If there's a timeout waiting to close the popup, clear it
+                if (closePopupTimeout) {
+                  clearTimeout(closePopupTimeout);
+                }
               });
 
+              // Hide popup with a 3-second delay on mouseout
+              marker1.on('mouseout', function () {
+                // Set a timeout to close the popup after 3 seconds
+                closePopupTimeout = setTimeout(function() {
+                  marker1.closePopup();
+                }, 3000); // 3000 milliseconds = 3 seconds
+              });
               return { latitude: lat, longitude: lon }; // Return coordinates
             } else {
               console.log("No results found for the address.");
@@ -167,8 +190,7 @@
           const address = inputValue;
           console.log("TEST");
 
-          console.log(getCoordinates(address));
-          console.log(getCoordinates("Baltimore"));
+          getCoordinates(address);
         },
         { passive: false }
       );
