@@ -33,7 +33,7 @@
             placeholder="Search by location or name"
             aria-label="Search"
           />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button class="btn btn-outline-success" onclick="onSearch(event)">Search</button>
         </form>
 
         <!-- Right section: Words (links or other content) -->
@@ -61,57 +61,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script>
-      // Creating map options
-      var mapOptions = {
-        center: [39.2904, -76.6122],
-        zoom: 10,
-      };
-
-      // Creating a map object
-      var map = new L.map("map", mapOptions);
-
-      // Creating a Layer object
-      var layer = new L.TileLayer(
-        "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      );
-
-      // Adding layer to the map
-      map.addLayer(layer);
-
-      // Creating a marker object and adding it to the map
-      var marker = new L.marker([39.2904, -76.6122], {
-        title: "You are here",
-      }).addTo(map);
-
-      // var marker2 = new L.marker([36.7783, 119.4179], {
-      //   title: "California",
-      // }).addTo(map);
-    </script>
-
-    <script>
-      const city = "Bethesda"; // Replace with the desired city
-      const apiKey =
-        "live-6-EB5SBmuXdr8hFNwWaV4KxcDZGPQvlG-jY036_wuNh03h9Zdua2dqWwGyoSeVmxBA28aHyExvTRg6PC"; // Replace with your actual API key
-
-      fetch(`https://api.charityapi.org/api/organizations/search/${city}`, {
-        method: "GET",
-        headers: {
-          apikey: apiKey,
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data); // Handle the data returned from the API
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    </script>
+    <script src="main.js"></script>
   </body>
 </html>
