@@ -1,0 +1,40 @@
+.navbar {
+  padding: 2rem 1rem;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+}
+
+.form-control {
+  font-size: 1.1rem;
+}
+
+.btn {
+  font-size: 1.1rem;
+}
+.form-control {
+  font-size: 1.2rem;
+  height: 50px;
+  width: 300px;
+}
+
+.btn {
+  font-size: 1.2rem;
+  height: 50px;
+}
+#map {
+  margin: 5% auto;
+  height: 80em;
+  width: 90%;
+  border: 1px solid black;
+}
+.nav-section-right {
+  font-size: extra-large;
+}
+#welcome {
+  font-size: 2rem;
+  margin-top: 10rem;
+}
