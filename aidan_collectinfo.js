@@ -21,41 +21,54 @@ async function getData(search) {
     charities = json.nonprofits;
 
     // Clear existing markers before adding new ones
-    map.eachLayer(layer => {
+    map.eachLayer((layer) => {
       if (layer instanceof L.Marker) {
         map.removeLayer(layer);
       }
     });
 
     for (let i = 0; i < charities.length; i++) {
-      const coords = await getDataFromName(charities[i].name, charities[i].locationAddress);
+      const coords = await getDataFromName(
+        charities[i].name,
+        charities[i].locationAddress
+      );
       if (charities[i].websiteUrl) {
-        L.marker(coords).addTo(map)
-        .bindPopup(`
+        L.marker(coords)
+          .addTo(map)
+          .bindPopup(
+            `
           <div class="popup-content">
             <h4 class="popup-title">${charities[i].name}</h4>
-            <a href="${`https://www.every.org/${charities[i].ein}#donate` || '#'}" class="popup-link" target="_blank">Donate Now</a><br>
-            <a href="//${charities[i].websiteUrl}" class="popup-link" target="_blank">Website</a> 
+            <a href="${
+              `https://www.every.org/${charities[i].ein}#donate` || "#"
+            }" class="popup-link" target="_blank">Donate Now</a><br>
+            <a href="//${
+              charities[i].websiteUrl
+            }" class="popup-link" target="_blank">Website</a> 
           </div>
-        `)
-        .on("mouseover", function () {
-          this.openPopup();
-        })
+        `
+          )
+          .on("mouseover", function () {
+            this.openPopup();
+          });
       } else {
-        L.marker(coords).addTo(map)
-        .bindPopup(`
+        L.marker(coords)
+          .addTo(map)
+          .bindPopup(
+            `
           <div class="popup-content">
             <h4 class="popup-title">${charities[i].name}</h4>
-            <a href="${`https://www.every.org/${charities[i].ein}#donate` || '#'}" class="popup-link" target="_blank">Donate Link</a><br>
+            <a href="${
+              `https://www.every.org/${charities[i].ein}#donate` || "#"
+            }" class="popup-link" target="_blank">Donate Link</a><br>
             No website found
           </div>
-        `)
-        .on("mouseover", function () {
-          this.openPopup();
-        })
+        `
+          )
+          .on("mouseover", function () {
+            this.openPopup();
+          });
       }
-
-
     }
   } catch (error) {
     console.error(error.message);
@@ -74,7 +87,7 @@ function onSearch(event) {
 
 // Creating map options
 var mapOptions = {
-  center: [39.2904, -76.6122],
+  center: [36.5, -100],
   zoom: 10,
 };
 
@@ -89,18 +102,15 @@ var layer = new L.TileLayer(
 // Adding layer to the map
 map.addLayer(layer);
 
-// Creating a marker object and adding it to the map
-var marker = new L.marker([39.2904, -76.6122], {
-  title: "You are here",
-}).addTo(map);
-
 const google_api_key = "AIzaSyB9Q3ocLVeLh1mGJiO9LcjMmapgSNWwLYI";
 
 // Function to fetch coordinates from Google Maps API
 async function getDataFromNameHelper(name, location) {
   try {
-    const place = name + ' ' + location; // Example of a place and city in one string
-    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(place)}&key=${google_api_key}`;
+    const place = name + " " + location; // Example of a place and city in one string
+    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+      place
+    )}&key=${google_api_key}`;
 
     const response = await fetch(geocodeUrl);
     const data = await response.json();
@@ -121,5 +131,3 @@ async function getDataFromNameHelper(name, location) {
 async function getDataFromName(name, place) {
   return await getDataFromNameHelper(name, place);
 }
-
-
