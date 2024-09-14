@@ -24,7 +24,7 @@
   height: 50px;
 }
 #map {
-  margin: 5% auto;
+  margin: 4% auto;
   height: 60em;
   width: 80%;
   border: 1px solid black;
@@ -34,7 +34,7 @@
 }
 #welcome {
   font-size: 2rem;
-  margin-top: 10rem;
+  margin-top: 8rem;
 }
 .btn-group-xs > .btn,
 .btn-xs {
@@ -43,8 +43,9 @@
   line-height: 0.5;
   border-radius: 0.4rem;
 }
+
 .btn.active {
-  background-color: rgb(5, 36, 123); /* Example color for the selected button */
+  background-color: rgb(6, 74, 47); /* Example color for the selected button */
   color: white;
 }
 
@@ -70,12 +71,12 @@
   }
   .btn {
     font-size: 0.7rem;
-    height: 3em;
+    height: 2.5em;
   }
   #search-button {
     font-size: 0.8rem;
   }
   #welcome {
-    margin-top: 10rem;
+    margin-top: 8em;
   }
 }
