@@ -45,11 +45,17 @@
         <!-- Right section: Filters -->
         <div class="nav-section-right">
           Filters:
-          <button type="button" class="btn btn-dark btn-xs">Non-Profits</button>
-          <button type="button" class="btn btn-dark btn-xs">Food Banks</button>
-          <button type="button" class="btn btn-dark btn-xs">
-            Social Wellfare
-          </button>
+          <div class="">
+            <button type="button" class="btn btn-dark btn-xs">
+              Non-Profits
+            </button>
+            <button type="button" class="btn btn-dark btn-xs">
+              Food Banks
+            </button>
+            <button type="button" class="btn btn-dark btn-xs">
+              Social Wellfare
+            </button>
+          </div>
         </div>
       </div>
     </nav>
@@ -99,62 +105,6 @@
       // var marker2 = new L.marker([36.7783, 119.4179], {
       //   title: "California",
       // }).addTo(map);
-    </script>
-
-    <script>
-      // Replace 'myPublicApiKey' with your actual API key
-      const apiUrl =
-        "https://partners.every.org/v0.2/nonprofit/maps?apiKey=myPublicApiKey";
-
-      // Function to fetch data from the API
-      function fetchData() {
-        fetch(apiUrl)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(
-                "Network response was not ok: " + response.statusText
-              );
-            }
-            return response.json(); // Parse JSON from the response
-          })
-          .then((data) => {
-            console.log(data); // Log the fetched data to the console
-            // You can also process the data here as needed
-          })
-          .catch((error) => {
-            console.error(
-              "There has been a problem with your fetch operation:",
-              error
-            );
-          });
-      }
-
-      // Call the function to fetch data
-      fetchData();
-    </script>
-    <script>
-      const city = "Bethesda"; // Replace with the desired city
-      const apiKey =
-        "live-6-EB5SBmuXdr8hFNwWaV4KxcDZGPQvlG-jY036_wuNh03h9Zdua2dqWwGyoSeVmxBA28aHyExvTRg6PC"; // Replace with your actual API key
-
-      fetch(`https://api.charityapi.org/api/organizations/search/${city}`, {
-        method: "GET",
-        headers: {
-          apikey: apiKey,
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data); // Handle the data returned from the API
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
     </script>
   </body>
 </html>

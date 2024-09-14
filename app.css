@@ -48,7 +48,7 @@
   color: white;
 }
 
-@media (max-width: 413px) {
+@media (max-width: 513px) {
   .navbar {
     padding: 4rem 2rem;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -70,9 +70,12 @@
   }
   .btn {
     font-size: 0.7rem;
-    height: 30px;
+    height: 3em;
   }
   #search-button {
     font-size: 0.8rem;
+  }
+  #welcome {
+    margin-top: 10rem;
   }
 }
