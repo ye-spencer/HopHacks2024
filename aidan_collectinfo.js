@@ -33,7 +33,12 @@ async function getData(search) {
         charities[i].locationAddress
       );
       if (coords) {
-        if (charities[i].websiteUrl) {
+        let URL = charities[i].websiteUrl;
+        if (URL) {
+          if (charities[i].websiteUrl.substr(0, 4) !== 'http') {
+            URL = '//' + URL;
+          }
+          console.log(URL);
           L.marker(coords)
             .addTo(map)
             .bindPopup(
@@ -43,8 +48,8 @@ async function getData(search) {
               <a href="${
                 `https://www.every.org/${charities[i].ein}#donate` || "#"
               }" class="popup-link" target="_blank">Donate Now</a><br>
-              <a href="//${
-                charities[i].websiteUrl
+              <a href="${
+                URL
               }" class="popup-link" target="_blank">Website</a> 
             </div>
           `
