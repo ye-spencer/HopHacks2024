@@ -29,20 +29,33 @@ async function getData(search) {
 
     for (let i = 0; i < charities.length; i++) {
       const coords = await getDataFromName(charities[i].name, charities[i].locationAddress);
-      L.marker(coords).addTo(map)
+      if (charities[i].websiteUrl) {
+        L.marker(coords).addTo(map)
         .bindPopup(`
           <div class="popup-content">
             <h4 class="popup-title">${charities[i].name}</h4>
-            <p>${charities[i].description || 'No description available'}<br>
-            <a href="${charities[i].donationUrl || '#'}" class="popup-link" target="_blank">Donate Link</a></p>
+            <a href="${`https://www.every.org/${charities[i].ein}#donate` || '#'}" class="popup-link" target="_blank">Donate Now</a><br>
+            <a href="//${charities[i].websiteUrl}" class="popup-link" target="_blank">Website</a> 
           </div>
         `)
         .on("mouseover", function () {
           this.openPopup();
         })
-        .on("mouseout", function () {
-          this.closePopup();
-        });
+      } else {
+        L.marker(coords).addTo(map)
+        .bindPopup(`
+          <div class="popup-content">
+            <h4 class="popup-title">${charities[i].name}</h4>
+            <a href="${`https://www.every.org/${charities[i].ein}#donate` || '#'}" class="popup-link" target="_blank">Donate Link</a><br>
+            No website found
+          </div>
+        `)
+        .on("mouseover", function () {
+          this.openPopup();
+        })
+      }
+
+
     }
   } catch (error) {
     console.error(error.message);
