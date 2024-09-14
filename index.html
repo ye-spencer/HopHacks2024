@@ -25,13 +25,14 @@
         <a class="navbar-brand" href="#">Charity Searcher</a>
 
         <!-- Center section: Search bar -->
-        <form class="d-flex mx-auto" role="search">
+        <form class="d-flex mx-auto" role="search" id="search-form">
           <input
             class="form-control me-2"
             type="search"
-            id="search-form"
+            id="search-input"
             placeholder="Search by location or name"
             aria-label="Search"
+            required
           />
           <button
             class="btn btn-outline-success"
@@ -153,13 +154,21 @@
             );
           });
       }
-
-      // Example usage
-      const address = "Chicago";
-      console.log("TEST");
-      console.log(getCoordinates(address));
-      console.log(
-        getCoordinates("1600 Amphitheatre Parkway, Mountain View, CA")
+      //example usage
+      document.getElementById("search-form").addEventListener(
+        "submit",
+        function (event) {
+          event.preventDefault(); // Prevent the default form submission
+          const inputValue = document.getElementById("search-input").value; // Get the input value
+          console.log(inputValue); // You can use this value as needed
+          // Add your search logic here
+          // Example: alert('Searching for: ' + inputValue);
+          const address = inputValue;
+          console.log("TEST");
+          console.log(getCoordinates(address));
+          console.log(getCoordinates("Baltimore"));
+        },
+        { passive: false }
       );
     </script>
   </body>
