@@ -98,32 +98,69 @@
       map.addLayer(layer);
 
       // Creating a marker object and adding it to the map
-      var marker = new L.marker([39.2904, -76.6122], {
-        title: "You are here",
-      }).addTo(map);
+      // var marker = new L.marker([39.2904, -76.6122], {
+      //   title: "You are here",
+      // }).addTo(map);
 
       // var marker2 = new L.marker([36.7783, 119.4179], {
       //   title: "California",
       // }).addTo(map);
     </script>
     <script>
-      const apiKey = '66e5c9dda2d53417477509ybn603cd4';
-  const url = `https://geocode.maps.co/search?q=555+5th+Ave+New+York+NY+10017+US&api_key=${apiKey}`;
+      const apiKey = "66e5c9dda2d53417477509ybn603cd4";
 
-  // Make a GET request to the API
-  fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      // Function to convert street address to coordinates
+      function getCoordinates(address) {
+        const url = `https://geocode.maps.co/search?q=${encodeURIComponent(
+          address
+        )}&api_key=${apiKey}`;
+
+        // Make a GET request to the API
+        fetch(url)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json(); // Parse the JSON data
+          })
+          .then((data) => {
+            if (data && data.length > 0) {
+              const { lat, lon } = data[0]; // Get the latitude and longitude from the first result
+              console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+              map.setView([lat, lon], 10);
+              var marker1 = new L.marker([lat, lon], {
+                title: "",
+              }).addTo(map);
+
+              marker1.bindPopup("ASDFLASJDFLASJDFLKASJDFLKASJDLKF");
+              marker1.on("mouseover", function () {
+                marker.openPopup();
+              });
+              marker1.on("mouseout", function () {
+                marker.openPopup();
+              });
+
+              return { latitude: lat, longitude: lon }; // Return coordinates
+            } else {
+              console.log("No results found for the address.");
+              return null; // No coordinates found
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
       }
-      return response.json(); // Parse the JSON data
-    })
-    .then(data => {
-      console.log(data); // Handle the JSON data here
-    })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
-    });
+
+      // Example usage
+      const address = "Chicago";
+      console.log("TEST");
+      console.log(getCoordinates(address));
+      console.log(
+        getCoordinates("1600 Amphitheatre Parkway, Mountain View, CA")
+      );
     </script>
   </body>
 </html>
