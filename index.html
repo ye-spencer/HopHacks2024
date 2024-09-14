@@ -106,5 +106,24 @@
       //   title: "California",
       // }).addTo(map);
     </script>
+    <script>
+      const apiKey = '66e5c9dda2d53417477509ybn603cd4';
+  const url = `https://geocode.maps.co/search?q=555+5th+Ave+New+York+NY+10017+US&api_key=${apiKey}`;
+
+  // Make a GET request to the API
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json(); // Parse the JSON data
+    })
+    .then(data => {
+      console.log(data); // Handle the JSON data here
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+    </script>
   </body>
 </html>
