@@ -43,11 +43,6 @@
   border-radius: 0.4rem;
 }
 
-.btn.active {
-  background-color: rgb(6, 74, 47); /* Example color for the selected button */
-  color: white;
-}
-
 @media (max-width: 513px) {
   .navbar {
     padding: 4rem 2rem;
