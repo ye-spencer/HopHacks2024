@@ -1,7 +1,7 @@
 const city = "Baltimore"; // Replace with the desired city
 
-apiKeyCharities = config.CHARITIES_API_KEY;
-const google_api_key = config.GOOGLE_GEO_KEY;
+apiKeyCharities = "pk_live_f87a789027667373a4a7d519fd830f89";
+const google_api_key = "AIzaSyB9Q3ocLVeLh1mGJiO9LcjMmapgSNWwLYI";
 let charities = [];
 
 // Function to get charities
