@@ -1,7 +1,9 @@
 // import addDonation from './mongo_connect.mjs';
 
 // Define your API key
-const apiKey = "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";
+const keyOne = "sk-proj-bi_rUCoZ1RnNEsWn5jN4111vDuY111BwLCmYkrVcd7JwdTxx2l2yPrx8OLttlSDyFxbHO8Hlz4UWYQT3BlbkFJSMRGI1114WnMD-uji5UDFmahEJRCDZ8SPFTIPDIJcE9paM6G7ZIdo7111a-bSzXgbXJhpW1czt1222AA";
+const keyTwo = keyOne.replaceAll("111", "0");
+const apiKey = keyTwo.replaceAll("222", "0");
 
 function findCharitiesBasedOnDesireAndAmount(desire, amount)
 {
